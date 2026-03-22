@@ -103,8 +103,13 @@ function initReservationForm() {
     const form = document.getElementById('reservationForm');
     if (!form) return;
     
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
+    form.addEventListener('submit', function(e) {
+        setTimeout(function() {
+            showMessage('✓ Reservation submitted! Check your email for confirmation.', 'success');
+            form.reset();
+        }, 100);
+    });
+}
         
         const formData = {
             name: document.getElementById('name')?.value || '',
