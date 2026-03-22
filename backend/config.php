@@ -1,9 +1,9 @@
 <?php
-// Database configuration
-$host = 'localhost';
-$username = 'root';
-$password = 'tiger';  // If you have MySQL password, add it here
-$database = 'sammys_cafe';
+// Database configuration for InfinityFree
+$host = 'sql103.byetcluster.com';
+$username = 'if0_41444293';
+$password = 'SammyCafe2026';  // Replace with your InfinityFree password
+$database = 'if0_41444293_sammys_cafe';
 
 // Create connection
 $conn = new mysqli($host, $username, $password, $database);
@@ -16,10 +16,8 @@ if ($conn->connect_error) {
     ]));
 }
 
-// Set JSON header for API responses
+// Set JSON header
 header('Content-Type: application/json');
-
-// Enable CORS (for development)
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');

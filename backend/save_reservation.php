@@ -1,19 +1,15 @@
 <?php
 require_once 'config.php';
 
-// Get JSON data from request
+// Get JSON data
 $input = json_decode(file_get_contents('php://input'), true);
 
-// Validate input
 if (!$input) {
-    echo json_encode([
-        'success' => false,
-        'message' => 'Invalid input data'
-    ]);
+    echo json_encode(['success' => false, 'message' => 'Invalid input']);
     exit;
 }
 
-// Sanitize and get data
+// Get and sanitize data
 $name = $conn->real_escape_string(trim($input['name']));
 $email = $conn->real_escape_string(trim($input['email']));
 $phone = $conn->real_escape_string(trim($input['phone']));
@@ -22,21 +18,9 @@ $time = $conn->real_escape_string($input['time']);
 $guests = (int)$input['guests'];
 $special = $conn->real_escape_string(trim($input['special'] ?? ''));
 
-// Basic validation
+// Validate
 if (empty($name) || empty($email) || empty($phone) || empty($date) || empty($time)) {
-    echo json_encode([
-        'success' => false,
-        'message' => 'All fields are required'
-    ]);
-    exit;
-}
-
-// Validate email
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo json_encode([
-        'success' => false,
-        'message' => 'Invalid email format'
-    ]);
+    echo json_encode(['success' => false, 'message' => 'All fields required']);
     exit;
 }
 
@@ -47,7 +31,7 @@ $sql = "INSERT INTO reservations (name, email, phone, reservation_date, reservat
 if ($conn->query($sql)) {
     echo json_encode([
         'success' => true,
-        'message' => 'Reservation saved successfully!',
+        'message' => 'Reservation saved to database!',
         'reservation_id' => $conn->insert_id
     ]);
 } else {
