@@ -130,7 +130,7 @@ function initReservationForm() {
         showMessage('Saving reservation...', '');
         
         try {
-            const response = await fetch('http://sammyscafe.fwh.is/backend/save_reservation.php', {
+            const response = await fetch('https://sammyscafe.fwh.is/backend/save_reservation.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
